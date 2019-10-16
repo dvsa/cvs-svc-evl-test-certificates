@@ -29,7 +29,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/dvsa/cvs-svc-evl-test-certificates/issues"
   },
   "homepage": "https://github.com/dvsa/cvs-svc-evl-test-certificates",
   "devDependencies": {
