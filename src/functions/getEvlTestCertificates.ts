@@ -8,6 +8,8 @@ export const getEvlTestCertificates = () => {
 
   return evlTestCertificatesService.getEvlTestCertificates().then((data) => {
       return new HTTPResponse(200, data);
+    }).catch((error:any)=>{
+      return new HTTPResponse(error.statusCode, error.body);
     });
 
 };

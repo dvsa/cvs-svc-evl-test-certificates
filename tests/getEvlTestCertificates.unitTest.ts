@@ -22,7 +22,7 @@ describe("getEvlTestCertificates", () => {
   });
 
   context("when records are found", () => {
-    it("should return a populated response and status code 200", () => {
+    it("should return a populated response and status code 200", async () => {
       MockTestResultsDAO = jest.fn().mockImplementation(() => {
         return {
           getEvlTestCertificates: () => {
@@ -32,7 +32,7 @@ describe("getEvlTestCertificates", () => {
       });
 
       evlTestCertificatesService = new EvlTestCertificatesService(new MockTestResultsDAO());
-      return evlTestCertificatesService.getEvlTestCertificates()
+      return await evlTestCertificatesService.getEvlTestCertificates()
         .then((returnedRecords: IEvlTestCertificate[]) => {
           expect(returnedRecords).to.not.equal(undefined);
           expect(returnedRecords).to.not.equal({});
