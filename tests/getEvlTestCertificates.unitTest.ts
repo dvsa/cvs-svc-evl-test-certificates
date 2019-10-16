@@ -32,12 +32,10 @@ describe("getEvlTestCertificates", () => {
       });
 
       evlTestCertificatesService = new EvlTestCertificatesService(new MockTestResultsDAO());
-      return await evlTestCertificatesService.getEvlTestCertificates()
-        .then((returnedRecords: IEvlTestCertificate[]) => {
-          expect(returnedRecords).to.not.equal(undefined);
-          expect(returnedRecords).to.not.equal({});
-          expect(JSON.stringify(returnedRecords)).to.equal(JSON.stringify(evlTestCertificatesMockDB));
-        });
+      const returnedRecords: IEvlTestCertificate[] = await evlTestCertificatesService.getEvlTestCertificates();
+      expect(returnedRecords).to.not.equal(undefined);
+      expect(returnedRecords).to.not.equal({});
+      expect(JSON.stringify(returnedRecords)).to.equal(JSON.stringify(evlTestCertificatesMockDB));
     });
   });
 });
