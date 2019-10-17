@@ -1,0 +1,23 @@
+functions:
+- getEvlTestCertificates:
+    method: GET
+    path: /evl-test-certificates/
+    function: getEvlTestCertificates
+serverless:
+  basePath: /${BRANCH}
+  port: 3006
+endpoints:
+  local-global:
+    params:
+      apiVersion: '2015-03-31'
+      region: eu-west-1
+      endpoint: http://localhost:4000
+    functions:
+      getEvlTestCertificates:
+        name: cvs-svc-global-dev-getEvlTestCertificates
+  remote:
+    params:
+      apiVersion: '2015-03-31'
+    functions:
+      getEvlTestCertificates:
+        name: lec-test-results-${BRANCH}
