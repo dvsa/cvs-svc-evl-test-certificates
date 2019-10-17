@@ -8,7 +8,8 @@
     "start:test": "npm run eslint && SLS_DEBUG=* BRANCH=local node_modules/gulp/bin/gulp.js start-serverless",
     "end:test": "node_modules/gulp/bin/gulp.js kill-serverless",
     "debug": "export SLS_DEBUG=* && BRANCH=local node --inspect ./node_modules/serverless/bin/serverless offline start",
-    "test": "BRANCH=local SLS_DEBUG=* AWS_XRAY_CONTEXT_MISSING=LOG_ERROR jest --testMatch=\\\"**/*.unitTest.ts\\\" --coverage",
+    "test": "BRANCH=local jest --testMatch=\"**/*.unitTest.ts\" --coverage",
+    "test-i": "BRANCH=local jest --testMatch=\"**/*.intTest.ts\" --runInBand",
     "prepush": "BRANCH=local npm test && npm run eslint",
     "predeploy": "npm install && npm run prepush",
     "build": "node_modules/typescript/bin/tsc --rootDir ./ --outDir .build --sourceMap false && npm run build:copy",
@@ -52,6 +53,7 @@
     "expect": "^24.8.0",
     "gulp": "^4.0.2",
     "jest": "^24.8.0",
+    "jest-cucumber": "^2.0.11",
     "jest-plugin-context": "^2.9.0",
     "jest-sonar-reporter": "^2.0.0",
     "lambda-tester": "^3.5.0",
@@ -72,7 +74,6 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.137",
     "aws-sdk": "^2.456.0",
     "aws-xray-sdk": "^2.3.3",
     "node-yaml": "^3.2.0",
@@ -89,5 +90,11 @@
     "collectCoverage": true,
     "testResultsProcessor": "jest-sonar-reporter",
     "testURL": "http://localhost"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prepush",
+      "pre-push": "npm run prepush"
+    }
   }
 }
